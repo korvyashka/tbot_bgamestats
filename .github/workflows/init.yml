@@ -10,8 +10,14 @@ jobs:
     steps:
     - name: SSH to Device and Install Docker
       run: |
+        # Add your SSH private key to the ssh-agent
+        echo "$SSH_PRIVATE_KEY" > key.pem
+        chmod 600 key.pem
         eval "$(ssh-agent -s)"
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" | ssh-add - 
+
+        # SSH to your device and install Docker
+        ssh -i key.pem
+        
         ssh root@${{ secrets.IP_ADDRESS }} "
           sudo apt-get update &&
           sudo apt-get install -y docker.io
