@@ -1,4 +1,4 @@
-name: CI Workflow
+name: Initialize Device
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    on: workflow_dispatch
 
     steps:
     - name: SSH to Device and Install Docker
