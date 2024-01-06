@@ -14,7 +14,7 @@ jobs:
         - echo "${SSH_PRIVATE_KEY}" | ssh-add -
 
         # SSH to your device, install Docker, and initialize GitHub repo
-        ssh -i key.pem root@$IP_ADDRESS "
+        ssh root@$IP_ADDRESS "
           sudo apt-get update &&
           sudo apt-get install -y docker.io
         "
