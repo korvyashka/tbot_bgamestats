@@ -14,11 +14,8 @@ jobs:
         echo "$SSH_PRIVATE_KEY" > key.pem
         chmod 600 key.pem
         eval "$(ssh-agent -s)"
-
-        # SSH to your device and install Docker
-        ssh -i key.pem
-        
-        ssh root@${{ secrets.IP_ADDRESS }} "
+      
+        ssh -i key.pem root@${{ secrets.IP_ADDRESS }} "
           sudo apt-get update &&
           sudo apt-get install -y docker.io
         "
