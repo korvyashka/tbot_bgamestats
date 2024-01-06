@@ -15,13 +15,8 @@ jobs:
         chmod 600 key.pem
         eval "$(ssh-agent -s)"
         
-        # Extract the host key from the SSH public key file
-        SSH_PUBLIC_KEY=$(ssh-keygen -y -f key.pem)
-      
-        # Add the host key to the known_hosts file
-        echo "${{ secrets.IP_ADDRESS }} ${SSH_PUBLIC_KEY}" >> ~/.ssh/known_hosts
-      
-        ssh -i key.pem root@${{ secrets.IP_ADDRESS }} "
+     
+        ssh -i key.pem -o "StrictHostKeyChecking no" root@${{ secrets.IP_ADDRESS }} "
           sudo apt-get update &&
           sudo apt-get install -y docker.io
         "
