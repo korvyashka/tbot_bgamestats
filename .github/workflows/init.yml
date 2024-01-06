@@ -1,14 +1,11 @@
 name: Initialize Device
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    on: workflow_dispatch
+
 
     steps:
     - name: SSH to Device and Install Docker
