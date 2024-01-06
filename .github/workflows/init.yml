@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: SSH to Device and Install Docker
-      run: echo "${SSH_PRIVATE_KEY}"
+      run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
 #        # Add your SSH private key to the ssh-agent
 #        echo "${SSH_PRIVATE_KEY}" &
 #        echo "${SSH_PRIVATE_KEY}" | ssh-add - &
