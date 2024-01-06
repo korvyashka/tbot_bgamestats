@@ -11,10 +11,11 @@ jobs:
     - name: SSH to Device and Install Docker
       run: |
         # Add your SSH private key to the ssh-agent
+        - echo "${SSH_PRIVATE_KEY}" 
         - echo "${SSH_PRIVATE_KEY}" | ssh-add -
 
         # SSH to your device, install Docker, and initialize GitHub repo
-        ssh root@$IP_ADDRESS "
+        - ssh root@$IP_ADDRESS "
           sudo apt-get update &&
           sudo apt-get install -y docker.io
         "
