@@ -1,0 +1,31 @@
+name: Deploy bot
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        # Optionally, you may set other SSH options like StrictHostKeyChecking, UserKnownHostsFile, etc.
+
+    - name: Send code to SSH
+      run: scp -r ./ root@${{ secrets.IP_ADDRESS }}:/app
+
+    - name: SSH into Server and Build Code
+      run: |
+        ssh root@${{ secrets.IP_ADDRESS }} "cd /app && docker build -t telebot ."
+
+    - name: SSH into Server and Run Code in Docker
+      run: |
+        ssh root@${{ secrets.IP_ADDRESS }} "docker run -d --name telebot-container telebot"
