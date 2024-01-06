@@ -13,7 +13,7 @@ jobs:
         chmod 400 key.pem
         eval "$(ssh-agent -s)"
         
-        echo "mz0912" | ssh -v -i key.pem -o "StrictHostKeyChecking no" root@${{ secrets.IP_ADDRESS }}
+        ssh -v -i key.pem -o "StrictHostKeyChecking no" root@${{ secrets.IP_ADDRESS }}
 #        ssh -i key.pem -o "StrictHostKeyChecking no" root@${{ secrets.IP_ADDRESS }} "
 #          sudo apt-get update &&
 #          sudo apt-get install -y docker.io
