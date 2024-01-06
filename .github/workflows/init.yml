@@ -5,8 +5,6 @@ on: workflow_dispatch
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-
     steps:
     - name: SSH to Device and Install Docker
       run: |
@@ -14,8 +12,8 @@ jobs:
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
         chmod 600 key.pem
         eval "$(ssh-agent -s)"
-     
-        ssh -i key.pem -o "StrictHostKeyChecking no" root@${{ secrets.IP_ADDRESS }} "
-          sudo apt-get update &&
-          sudo apt-get install -y docker.io
-        "
+
+#        ssh -i key.pem -o "StrictHostKeyChecking no" root@${{ secrets.IP_ADDRESS }} "
+#          sudo apt-get update &&
+#          sudo apt-get install -y docker.io
+#        "
