@@ -11,7 +11,7 @@ jobs:
     - name: SSH to Device and Install Docker
       run: |
         # Add your SSH private key to the ssh-agent
-        echo "$SSH_PRIVATE_KEY" > key.pem
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
         chmod 600 key.pem
         eval "$(ssh-agent -s)"
         
